@@ -126,7 +126,8 @@ class Apple(GameObject):
 
         Args:
             color (tuple[int, int, int]): Цвет Apple
-            occupied_count (list[tuple[int, int]]): Список занятых ячеек.
+            occupied_count (list[tuple[int, int]] | None):
+                Список занятых ячеек.
         """
         super().__init__(color)
 
@@ -142,7 +143,8 @@ class Apple(GameObject):
         Сгенерировать случайное положение.
 
         Args:
-            occupied_count (list[tuple[int, int]]): Список занятых ячеек.
+            occupied_count (list[tuple[int, int]] | None):
+                Список занятых ячеек.
         """
         if occupied_count is None:
             occupied_count = []
