@@ -47,16 +47,16 @@ MOVE_DIRECTION = {
 }
 
 # Цвет фона - черный:
-BOARD_BACKGROUND_COLOR = (0, 0, 0)
+BOARD_BACKGROUND_COLOR = (0x0, 0x0, 0x0)
 
 # Цвет границы ячейки
-BORDER_COLOR = (93, 216, 228)
+BORDER_COLOR = (0x5D, 0xD8, 0xE4)
 
 # Цвет яблока
-APPLE_COLOR = (255, 0, 0)
+APPLE_COLOR = (0xFF, 0x0, 0x0)
 
 # Цвет змейки
-SNAKE_COLOR = (0, 255, 0)
+SNAKE_COLOR = (0x0, 0xFF, 0x0)
 
 # Скорость движения змейки:
 SPEED = 5
@@ -75,32 +75,32 @@ class GameObject:
     """Базовый класс игровых объектов."""
 
     def __init__(self,
-                 color: tuple = (0, 0, 0)) -> None:
+                 color: tuple[int, int, int] = (0x0, 0x0, 0x0)) -> None:
         """
         Родительский класс GameObject.
         Задает начальную позицию в центре экрана.
         Задает начальный цвет как None.
 
         Args:
-            color (tuple): Цвет объекта
+            color (tuple[int, int, int]): Цвет объекта
         """
         self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        self.color = color
+        self.body_color = color
 
     def _draw_cell(self,
-                   position: tuple | None = None,
-                   color: tuple | None = None) -> None:
+                   position: tuple[int, int] | None = None,
+                   color: tuple[int, int, int] | None = None) -> None:
         """
         Отрисовать одну ячейку на поле
 
         Args:
-            position (tuple): позиция объекта
-            color (tuple): цвет объекта
+            position (tuple[int, int] | None): Позиция объекта
+            color (tuple[int, int, int] | None): Цвет объекта
         """
         if position is None:
             position = self.position
         if color is None:
-            color = self.color
+            color = self.body_color
 
         rect = pg.Rect(position, (GRID_SIZE, GRID_SIZE))
         pg.draw.rect(screen, color, rect)
@@ -116,13 +116,13 @@ class Apple(GameObject):
     """Класс игрового объекта Apple, наследуемого от GameObject."""
 
     def __init__(self,
-                 color: tuple = APPLE_COLOR,
+                 color: tuple[int, int, int] = APPLE_COLOR,
                  occupied_count: list[tuple[int, int]] = []) -> None:
         """
         Создать объект Apple, наследуемый от GameObject.
 
         Args:
-            color (tuple): Цвет Apple
+            color (tuple[int, int, int]): Цвет Apple
             occupied_count (list[tuple[int, int]]): Список занятых ячеек.
         """
         super().__init__(color)
@@ -157,23 +157,23 @@ class Snake(GameObject):
     """Класс игрового объекта Snake, наследуемого от GameObject."""
 
     def __init__(self,
-                 color: tuple = SNAKE_COLOR) -> None:
+                 color: tuple[int, int, int] = SNAKE_COLOR) -> None:
         """
         Создать объект Sneak, наследуемый от GameObject.
 
         Args:
-            color (tuple): Цвет Snake
+            color (tuple[int, int, int]): Цвет Snake
         """
         super().__init__(color)
         self.reset()
 
     def update_direction(self,
-                         next_direction: tuple | None) -> None:
+                         next_direction: tuple[int, int] | None) -> None:
         """
         Поменять направление движения.
 
         Args:
-            next_direction (tuple | None): Направление
+            next_direction (tupl[int, int] | None): Направление
         """
         if next_direction is None:
             return
@@ -260,8 +260,10 @@ def main() -> None:
     # Инициализация PyGame:
     pg.init()
 
+    blue_gray = (0xAF, 0xF0, 0xF3)
+
     # Инициализируем игровые объекты
-    snake = Snake()
+    snake = Snake(blue_gray)
     apple = Apple(occupied_count=snake.positions)
 
     while True:
