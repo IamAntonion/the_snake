@@ -78,7 +78,7 @@ class GameObject:
                  color: tuple[int, int, int] = (0x0, 0x0, 0x0)
                  ) -> None:
         """
-        Родительский класс GameObject.
+        Инициализатор класса GameObject.
         Задает начальную позицию в центре экрана.
         Задает начальный цвет как None.
 
