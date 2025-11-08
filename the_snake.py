@@ -75,7 +75,8 @@ class GameObject:
     """Базовый класс игровых объектов."""
 
     def __init__(self,
-                 color: tuple[int, int, int] = (0x0, 0x0, 0x0)) -> None:
+                 color: tuple[int, int, int] = (0x0, 0x0, 0x0)
+                 ) -> None:
         """
         Родительский класс GameObject.
         Задает начальную позицию в центре экрана.
@@ -89,7 +90,8 @@ class GameObject:
 
     def _draw_cell(self,
                    position: tuple[int, int] | None = None,
-                   color: tuple[int, int, int] | None = None) -> None:
+                   color: tuple[int, int, int] | None = None
+                   ) -> None:
         """
         Отрисовать одну ячейку на поле
 
@@ -117,7 +119,8 @@ class Apple(GameObject):
 
     def __init__(self,
                  color: tuple[int, int, int] = APPLE_COLOR,
-                 occupied_count: list[tuple[int, int]] = []) -> None:
+                 occupied_count: list[tuple[int, int]] | None = None
+                 ) -> None:
         """
         Создать объект Apple, наследуемый от GameObject.
 
@@ -126,16 +129,24 @@ class Apple(GameObject):
             occupied_count (list[tuple[int, int]]): Список занятых ячеек.
         """
         super().__init__(color)
+
+        if occupied_count is None:
+            occupied_count = []
+
         self.randomize_position(occupied_count)
 
     def randomize_position(self,
-                           occupied_count: list[tuple[int, int]] = []) -> None:
+                           occupied_count: list[tuple[int, int]] | None = None
+                           ) -> None:
         """
         Сгенерировать случайное положение.
 
         Args:
             occupied_count (list[tuple[int, int]]): Список занятых ячеек.
         """
+        if occupied_count is None:
+            occupied_count = []
+
         x_position = int()
         y_position = int()
 
@@ -157,7 +168,8 @@ class Snake(GameObject):
     """Класс игрового объекта Snake, наследуемого от GameObject."""
 
     def __init__(self,
-                 color: tuple[int, int, int] = SNAKE_COLOR) -> None:
+                 color: tuple[int, int, int] = SNAKE_COLOR
+                 ) -> None:
         """
         Создать объект Sneak, наследуемый от GameObject.
 
@@ -168,7 +180,8 @@ class Snake(GameObject):
         self.reset()
 
     def update_direction(self,
-                         next_direction: tuple[int, int] | None) -> None:
+                         next_direction: tuple[int, int] | None
+                         ) -> None:
         """
         Поменять направление движения.
 
