@@ -275,6 +275,7 @@ def update(snake: Snake,
     Args:
         snake (Snake): Игровой объект змеи.
         apple (Apple): Игровой объект яблока.
+        direction: tuple[int, int] | None: Направление движения.
     """
     # Двигаем змею после обработки клавиш
     snake.update_direction(direction)
