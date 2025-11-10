@@ -173,7 +173,8 @@ class Snake(GameObject):
         super().__init__(color)
         self.reset()
 
-    def update_direction(self, direction: tuple[int, int] | None) -> None:
+    def update_direction(self, 
+                         direction: tuple[int, int] | None) -> None:
         """
         Поменять направление движения.
 
