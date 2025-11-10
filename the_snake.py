@@ -173,7 +173,7 @@ class Snake(GameObject):
         super().__init__(color)
         self.reset()
 
-    def update_direction(self, 
+    def update_direction(self,
                          direction: tuple[int, int] | None) -> None:
         """
         Поменять направление движения.
@@ -258,11 +258,10 @@ def handle_keys(game_object: Snake) -> tuple[int, int] | None:
         if event.type == pg.QUIT:
             pg.quit()
             raise SystemExit
-        # Обработка клавишь и дальнешее перемещение
+        # Обработка клавишь перемещения
         if event.type == pg.KEYDOWN:
-            next_direction = MOVE_DIRECTION.get((event.key,
-                                                 game_object.direction))
-            return next_direction
+            return MOVE_DIRECTION.get((event.key,
+                                       game_object.direction))
     return None
 
 
